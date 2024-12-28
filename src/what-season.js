@@ -31,6 +31,7 @@ function getSeason(date) {
     return 'autumn';
   }
 }
+
 console.log(getSeason(new Date(2020, 2, 31))); 
 
 
