@@ -15,7 +15,7 @@ function getSeason(date) {
   if (date === undefined || date === null) {
     return 'Unable to determine the time of year!';
   }
-  if (!(date instanceof Date) || isNaN(date.getTime())) {
+  if (!(date instanceof Date) || isNaN(date.getTime())|| Object.getOwnPropertyNames(date).length > 0) {
     throw new Error('Invalid date!');
   }
 
@@ -33,6 +33,11 @@ function getSeason(date) {
 }
 
 console.log(getSeason(new Date(2020, 2, 31))); 
+try {
+  console.log(getSeason(new Date('invalid date'))); // Ошибка 'Invalid date!'
+} catch (error) {
+  console.error(error.message);
+}
 
 
 module.exports = {
