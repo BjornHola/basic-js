@@ -11,7 +11,7 @@ const { NotImplementedError } = require('../extensions/index.js');
  * getSeason(new Date(2020, 02, 31)) => 'spring'
  * 
  */
-function whatSeason(date) {
+function getSeason(date) {
   if (!date || Object.prototype.toString.call(date) !== '[object Date]' || isNaN(date)) {
     throw new Error('Invalid date!');
   }
