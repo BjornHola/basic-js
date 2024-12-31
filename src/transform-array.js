@@ -1,3 +1,4 @@
+//import { NotImplementedError, testOptional } from '../extensions/index.js';
 const { NotImplementedError } = require('../extensions/index.js');
 
 /**
@@ -43,13 +44,12 @@ function transform(arr) {
 
   return transformedArr;
 }
+}
 
-
-console.log(transform([1, 2, 3, '--double-next', 4, 5])); // [1, 2, 3, 4, 4, 5]
-console.log(transform([1, 2, 3, '--discard-prev', 4, 5])); // [1, 2, 4, 5]
-console.log(transform([1, 2, '--discard-next', 3, 4, 5])); // [1, 2, 4, 5]
-console.log(transform([1, 2, '--double-prev', 3, 4, 5])); // [1, 2, 2, 3, 4, 5]
-
+console.log(transform([1, 2, 3, '--double-next', 4, 5])); 
+console.log(transform([1, 2, 3, '--discard-prev', 4, 5])); 
+console.log(transform([1, 2, '--discard-next', 3, 4, 5])); 
+console.log(transform([1, 2, '--double-prev', 3, 4, 5])); 
 
 module.exports = {
   transform
