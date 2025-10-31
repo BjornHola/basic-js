@@ -18,6 +18,12 @@ function countCats(matrix) {
   const filtered =  matrix.flat().filter(item => item === '^^' );
   return filtered.length;
 }
+countCats([
+ [0, 1, '^^'],
+ [0, '^^', 2],
+ ['^^', 1, 2]
+ ]);
+
 
 module.exports = {
   countCats
