@@ -17,7 +17,7 @@ function transform(arr) {
   if (!Array.isArray(arr)) {
     throw new Error("'arr' parameter must be an instance of the Array!");
   }
-  const copy = arr;
+  const copy = [...arr];
   for(let i = 0; i <= copy.length; i += 1) {
     if (typeof copy[i] === "string"){
       switch(copy[i]){
@@ -31,7 +31,7 @@ function transform(arr) {
           } else {
             return copy;
           }
-          
+
         case '--double-prev':
           if (copy[i - 1]) {
             let valuePrev = copy[i - 1];
