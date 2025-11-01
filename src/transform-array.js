@@ -14,47 +14,33 @@ const { NotImplementedError } = require('../lib');
  *
  */
 function transform(arr) {
-  if (!Array.isArray(arr)) {
-    throw new Error("'arr' parameter must be an instance of the Array!");
-  }
-  const copy = [...arr];
-  for(let i = 0; i <= copy.length; i += 1) {
-    if (typeof copy[i] === "string"){
-      switch(copy[i]){
+  if (!Array.isArray(arr)) throw new Error("'arr' parameter must be an instance of the Array!");
+  const result = [];
+  let skip = false;
 
-        case '--double-next':
-          if(copy[i + 1]) {
-          let valueNext = copy[i + 1];
-          let newElem = valueNext;
-          copy.splice(i, copy[i], newElem);
-          return copy;
-          } else {
-            return copy;
-          }
-
-        case '--double-prev':
-          if (copy[i - 1]) {
-            let valuePrev = copy[i - 1];
-            let newElem = valuePrev;
-            copy.splice(i, copy[i], newElem);
-            return copy;
-          } else return copy;
-        
-        case "--discard-prev":
-          if (copy[i -1]) {
-            return copy.splice(copy[i -1], 2);
-          } else return copy;
-
-        case "--discard-next":
-          if (copy[i + 1]) {
-            return copy.splice(copy[i], 2);
-          } else return copy;
-
-        default:
-          return copy;
-      }
+  for (let i = 0; i < arr.length; i++) {
+    if (skip) {
+      skip = false;
+      continue;
+    }
+    switch (arr[i]) {
+      case '--discard-next':
+        skip = true;
+        break;
+      case '--discard-prev':
+        if (result.length && arr[i - 2] !== '--discard-next') result.pop();
+        break;
+      case '--double-next':
+        if (i + 1 < arr.length) result.push(arr[i + 1]);
+        break;
+      case '--double-prev':
+        if (i > 0 && arr[i - 2] !== '--discard-next') result.push(arr[i - 1]);
+        break;
+      default:
+        result.push(arr[i]);
     }
   }
+  return result;
 }
 
 module.exports = {
